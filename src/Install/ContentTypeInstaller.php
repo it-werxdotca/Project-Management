@@ -100,7 +100,7 @@ class ContentTypeInstaller {
 	$field_name = 'field_project_management_task_comments';
 	$content_type = 'project_management_task';
 
-	// Check if the field exists
+	// Check if the comment field exists
 	$fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
 	if (!isset($fields[$field_name])) {
 	  // Create field storage
@@ -111,7 +111,7 @@ class ContentTypeInstaller {
 		'settings' => ['target_type' => 'comment'],
 	  ])->save();
 
-	  // Create field instance
+	  // Create comment field instance
 	  FieldConfig::create([
 		'field_name' => $field_name,
 		'entity_type' => 'node',
