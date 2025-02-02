@@ -13,3 +13,52 @@ function project_management_install() {
   // Create taxonomy vocabulary and terms
   \Drupal::service('project_management.install.taxonomy')->createTaxonomyVocabulary();
 }
+
+<?php
+
+/**
+ * Implements hook_schema() for database table project_management_user_roles.
+ */
+function project_management_schema() {
+  $schema['project_management_user_roles'] = [
+    'description' => 'Stores user roles assigned to multiple projects.',
+    'fields' => [
+      'id' => [
+        'description' => 'Primary Key.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'uid' => [
+        'description' => 'User ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'role' => [
+        'description' => 'Assigned role.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'project_ids' => [
+        'description' => 'Array of Project IDs (JSON encoded).',
+        'type' => 'text',
+        'not null' => FALSE,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'uid' => ['uid'],
+      'role' => ['role'],
+    ],
+    'foreign keys' => [
+      'user' => [
+        'table' => 'users_field_data',
+        'columns' => ['uid' => 'uid'],
+      ],
+    ],
+  ];
+
+  return $schema;
+}

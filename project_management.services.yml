@@ -11,3 +11,7 @@ services:
   project_management.api:
     class: Drupal\project_management\Api\ProjectApi
     arguments: ['@entity_type.manager']
+  
+  project_management.user_role_project_service:
+  class: 'Drupal\project_management\Service\UserRoleProjectService'
+  arguments: ['@database']
