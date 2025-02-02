@@ -1,17 +1,12 @@
 <?php
 
-use Drupal\project_management\Uninstall\ContentTypeUninstaller;
-use Drupal\project_management\Uninstall\TaxonomyUninstaller;
-use Drupal\project_management\Uninstall\CommentUninstaller;
-use Drupal\project_management\Uninstall\RolesUninstaller;
-
 /**
  * Implements hook_uninstall().
  */
 function project_management_uninstall() {
   // Run each uninstaller separately.
-  (new ContentTypeUninstaller())->uninstall();
-  (new TaxonomyUninstaller())->uninstall();
-  (new CommentUninstaller())->uninstall();
-  (new RolesUninstaller())->uninstall();
+  (new \Drupal\project_management\Uninstall\ContentTypeUninstaller())->uninstall();
+  (new \Drupal\project_management\Uninstall\TaxonomyUninstaller())->uninstall();
+  (new \Drupal\project_management\Uninstall\CommentUninstaller())->uninstall();
+  (new \Drupal\project_management\Uninstall\RolesUninstaller())->uninstall();
 }
