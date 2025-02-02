@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function project_management_install() {
+  // Create required roles
+  \Drupal::service('project_management.install.roles')->createRoles();
+
+  // Create content types and fields
+  \Drupal::service('project_management.install.content_types')->createContentTypes();
+
+  // Create taxonomy vocabulary and terms
+  \Drupal::service('project_management.install.taxonomy')->createTaxonomyVocabulary();
+}
