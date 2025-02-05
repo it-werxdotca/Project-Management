@@ -4,61 +4,20 @@
  * Implements hook_install().
  */
 function project_management_install() {
-  // Create required roles
-  \Drupal::service('project_management.install.roles')->createRoles();
+  try {
+    // Create required roles.
+    \Drupal::service('project_management.install.roles')->createRoles();
 
-  // Create content types and fields
-  \Drupal::service('project_management.install.content_types')->createContentTypes();
+    // Create content types and fields.
+    \Drupal::service('project_management.install.content_types')->createContentTypes();
 
-  // Create taxonomy vocabulary and terms
-  \Drupal::service('project_management.install.taxonomy')->createTaxonomyVocabulary();
-}
+    // Create taxonomy vocabulary and terms.
+    \Drupal::service('project_management.install.taxonomy')->createTaxonomyVocabulary();
 
-<?php
+    // Create data table for Project Management.
+    \Drupal::service('database')->schema()->createTable('project_management_users', \Drupal\project_management\Install\ProjectManagementDataInstall::schema());
 
-/**
- * Implements hook_schema() for database table project_management_user_roles.
- */
-function project_management_schema() {
-  $schema['project_management_user_roles'] = [
-    'description' => 'Stores user roles assigned to multiple projects.',
-    'fields' => [
-      'id' => [
-        'description' => 'Primary Key.',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ],
-      'uid' => [
-        'description' => 'User ID.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ],
-      'role' => [
-        'description' => 'Assigned role.',
-        'type' => 'varchar',
-        'length' => 255,
-        'not null' => TRUE,
-      ],
-      'project_ids' => [
-        'description' => 'Array of Project IDs (JSON encoded).',
-        'type' => 'text',
-        'not null' => FALSE,
-      ],
-    ],
-    'primary key' => ['id'],
-    'indexes' => [
-      'uid' => ['uid'],
-      'role' => ['role'],
-    ],
-    'foreign keys' => [
-      'user' => [
-        'table' => 'users_field_data',
-        'columns' => ['uid' => 'uid'],
-      ],
-    ],
-  ];
-
-  return $schema;
+  } catch (\Exception $e) {
+    \Drupal::logger('project_management')->error('Error during installation: @message', ['@message' => $e->getMessage()]);
+  }
 }

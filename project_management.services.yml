@@ -1,17 +1,17 @@
 services:
-  project_management.install.roles:
-    class: Drupal\project_management\Install\ProjectManagementRoles
+project_management.install.roles:
+  class: Drupal\project_management\Install\ProjectManagementRoles
 
-  project_management.install.content_types:
-    class: Drupal\project_management\Install\ProjectManagementContentTypes
+project_management.install.content_types:
+  class: Drupal\project_management\Install\ProjectManagementContentTypes
 
-  project_management.install.taxonomy:
-    class: Drupal\project_management\Install\ProjectManagementTaxonomy
+project_management.install.taxonomy:
+  class: Drupal\project_management\Install\ProjectManagementTaxonomy
 
-  project_management.api:
-    class: Drupal\project_management\Api\ProjectApi
-    arguments: ['@entity_type.manager']
-  
-  project_management.user_role_project_service:
+project_management.api:
+  class: Drupal\project_management\Api\ProjectApi
+  arguments: ['@entity_type.manager']
+
+project_management.user_role_project_service:
   class: 'Drupal\project_management\Service\UserRoleProjectService'
   arguments: ['@database']
