@@ -3,7 +3,6 @@ type: module
 description: 'Provides project management API and UI for managing projects and roles.'
 core_version_requirement: ^11
 dependencies:
-  - drupal:role
   - drupal:user
   - drupal:taxonomy
   - drupal:node
