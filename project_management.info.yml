@@ -1,12 +1,10 @@
 name: 'Project Management'
 type: module
+package: Custom
 description: 'Provides project management API and UI for managing projects and roles.'
 core_version_requirement: ^11
 dependencies:
   - drupal:user
   - drupal:taxonomy
-  - drupal:node
   - drupal:workflows
-  - drupal:field
   - drupal:views
-package: Custom
